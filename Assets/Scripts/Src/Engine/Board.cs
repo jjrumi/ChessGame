@@ -15,30 +15,24 @@ namespace BitterBloom.ChessGame.Engine
 
 		public void Initialize()
 		{
-			createTiles();
+			CreateTiles();
 		}
 
 		/**
-		 * Populate tiles list with Tile objects and define their name and position in the board.
+		 * Populate tiles list with Tile objects and define their unique name: A1, A2, ..., C3, ..., H8.
 		 */
-		private void createTiles()
+		private void CreateTiles()
 		{
 			string[] horizontalTiles	= new string[] { "A", "B", "C", "D", "E", "F", "G", "H" };
 			string[] verticalTiles		= new string[] { "1", "2", "3", "4", "5", "6", "7", "8" };
 
-			int hPosition = 0;
 			foreach( string hTile in horizontalTiles )
 			{
-				int vPosition = 0;
 				foreach( string vTile in verticalTiles )
 				{
 					string tileName = hTile + vTile;
-					tiles.Add( tileName, new Tile( tileName, hPosition, vPosition ) );
-
-					++vPosition;
+					tiles.Add( tileName, new Tile( tileName ) );
 				}
-
-				++hPosition;
 			}
 		}
 
@@ -47,12 +41,20 @@ namespace BitterBloom.ChessGame.Engine
 		 */
 		public void PlacePiece( Piece piece, string coordinates )
 		{
-			if( !tiles[coordinates].isEmpty() )
+			if( !tiles[coordinates].IsEmpty() )
 			{
 				throw new TargetTileOccupiedException();
 			}
 
-			tiles[coordinates].placePiece( piece );
+			tiles[coordinates].PlacePiece( piece );
+		}
+
+		public void PlaceListOfPieces( Dictionary<Piece, string> setPieces )
+		{
+			foreach( KeyValuePair<Piece, string> entry in setPieces )
+			{
+				PlacePiece( entry.Key, entry.Value );
+			}
 		}
 
 		public Dictionary<string, Tile> Tiles

@@ -6,6 +6,8 @@ namespace BitterBloom.ChessGame.Engine
 {
 	public class ChessEngine
 	{
+		public enum PlayerColor { White, Black };
+
 		public enum PieceID { 
 			PawnA, 		PawnB,			PawnC,			PawnD,	PawnE,	PawnF,			PawnG,			PawnH, 
 			QueensRook,	QueensKnight,	QueensBishop,	Queen,	King,	KingsBishop,	KingsKnight,	KingsRook
@@ -18,8 +20,8 @@ namespace BitterBloom.ChessGame.Engine
 		public ChessEngine()
 		{
 			board = new Board();
-			white = new Player( Player.Color.White );
-			black = new Player( Player.Color.Black );
+			white = new Player( PlayerColor.White );
+			black = new Player( PlayerColor.Black );
 		}
 
 		/**
@@ -27,85 +29,101 @@ namespace BitterBloom.ChessGame.Engine
 		 */
 		public void Initialize()
 		{
-			white.Initialize();
-			black.Initialize();
 			board.Initialize();
-			placePiecesOnBoard();
+			Dictionary<Piece, string> whitePieces = defineWhitePiecesLocationOnBoard();
+			Dictionary<Piece, string> blackPieces = defineBlackPiecesLocationOnBoard();
+			board.PlaceListOfPieces( whitePieces );
+			board.PlaceListOfPieces( blackPieces );
+			white.Pieces = whitePieces;
+			black.Pieces = blackPieces;
 		}
 
 		/**
-		 * Set the player's pieces on the board with the help of a Hash who defines the starting piece location:
-		 *	For white player:
-		 *		QueensRook -> A1
-		 *		QueensKnight -> B1 
-		 *		...
-		 *
-		 *	For black player:
-		 *		QueensRook -> A8 
-		 *		QueensKnight -> B8 
-		 *		...
+		 * Create white player's pieces with their initial position.
 		 */
-		private void placePiecesOnBoard()
+		private Dictionary<Piece, string> defineWhitePiecesLocationOnBoard()
 		{
-			Dictionary<PieceID, string> whiteSetPiecesStartLocation = new Dictionary<PieceID, string>();
-			whiteSetPiecesStartLocation.Add( PieceID.PawnA, "A2" );
-			whiteSetPiecesStartLocation.Add( PieceID.PawnB, "B2" );
-			whiteSetPiecesStartLocation.Add( PieceID.PawnC, "C2" );
-			whiteSetPiecesStartLocation.Add( PieceID.PawnD, "D2" );
-			whiteSetPiecesStartLocation.Add( PieceID.PawnE, "E2" );
-			whiteSetPiecesStartLocation.Add( PieceID.PawnF, "F2" );
-			whiteSetPiecesStartLocation.Add( PieceID.PawnG, "G2" );
-			whiteSetPiecesStartLocation.Add( PieceID.PawnH, "H2" );
-			whiteSetPiecesStartLocation.Add( PieceID.QueensRook, "A1" );
-			whiteSetPiecesStartLocation.Add( PieceID.QueensKnight, "B1" );
-			whiteSetPiecesStartLocation.Add( PieceID.QueensBishop, "C1" );
-			whiteSetPiecesStartLocation.Add( PieceID.Queen, "D1" );
-			whiteSetPiecesStartLocation.Add( PieceID.King, "E1" );
-			whiteSetPiecesStartLocation.Add( PieceID.KingsBishop, "F1" );
-			whiteSetPiecesStartLocation.Add( PieceID.KingsKnight, "G1" );
-			whiteSetPiecesStartLocation.Add( PieceID.KingsRook, "H1" );
+			Dictionary<Piece, string> whiteSetPieces = new Dictionary<Piece, string>();
+			whiteSetPieces.Add( new Pawn( PieceID.PawnA ), "A2" );
+			whiteSetPieces.Add( new Pawn( PieceID.PawnB ), "B2" );
+			whiteSetPieces.Add( new Pawn( PieceID.PawnC ), "C2" );
+			whiteSetPieces.Add( new Pawn( PieceID.PawnD ), "D2" );
+			whiteSetPieces.Add( new Pawn( PieceID.PawnE ), "E2" );
+			whiteSetPieces.Add( new Pawn( PieceID.PawnF ), "F2" );
+			whiteSetPieces.Add( new Pawn( PieceID.PawnG ), "G2" );
+			whiteSetPieces.Add( new Pawn( PieceID.PawnH ), "H2" );
+			whiteSetPieces.Add( new Rook( PieceID.QueensRook ), "A1" );
+			whiteSetPieces.Add( new Knight( PieceID.QueensKnight ), "B1" );
+			whiteSetPieces.Add( new Bishop( PieceID.QueensBishop ), "C1" );
+			whiteSetPieces.Add( new Queen( PieceID.Queen ), "D1" );
+			whiteSetPieces.Add( new King( PieceID.King ), "E1" );
+			whiteSetPieces.Add( new Bishop( PieceID.KingsBishop ), "F1" );
+			whiteSetPieces.Add( new Knight( PieceID.KingsKnight ), "G1" );
+			whiteSetPieces.Add( new Rook( PieceID.KingsRook ), "H1" );
 
-			Dictionary<PieceID, string> blackSetPiecesStartLocation = new Dictionary<PieceID, string>();
-			blackSetPiecesStartLocation.Add( PieceID.PawnA, "A7" );
-			blackSetPiecesStartLocation.Add( PieceID.PawnB, "B7" );
-			blackSetPiecesStartLocation.Add( PieceID.PawnC, "C7" );
-			blackSetPiecesStartLocation.Add( PieceID.PawnD, "D7" );
-			blackSetPiecesStartLocation.Add( PieceID.PawnE, "E7" );
-			blackSetPiecesStartLocation.Add( PieceID.PawnF, "F7" );
-			blackSetPiecesStartLocation.Add( PieceID.PawnG, "G7" );
-			blackSetPiecesStartLocation.Add( PieceID.PawnH, "H7" );
-			blackSetPiecesStartLocation.Add( PieceID.QueensRook, "A8" );
-			blackSetPiecesStartLocation.Add( PieceID.QueensKnight, "B8" );
-			blackSetPiecesStartLocation.Add( PieceID.QueensBishop, "C8" );
-			blackSetPiecesStartLocation.Add( PieceID.Queen, "D8" );
-			blackSetPiecesStartLocation.Add( PieceID.King, "E8" );
-			blackSetPiecesStartLocation.Add( PieceID.KingsBishop, "F8" );
-			blackSetPiecesStartLocation.Add( PieceID.KingsKnight, "G8" );
-			blackSetPiecesStartLocation.Add( PieceID.KingsRook, "H8" );
-
-			// Place White player pieces.
-			foreach( KeyValuePair<PieceID, Piece> entry in white.Pieces )
-			{
-				if( whiteSetPiecesStartLocation.ContainsKey( entry.Key ) )
-				{
-					board.PlacePiece( entry.Value, whiteSetPiecesStartLocation[entry.Key] );
-				}
-			}
-
-			// Place Black player pieces.
-			foreach( KeyValuePair<PieceID, Piece> entry in black.Pieces )
-			{
-				if( blackSetPiecesStartLocation.ContainsKey( entry.Key ) )
-				{
-					board.PlacePiece( entry.Value, blackSetPiecesStartLocation[entry.Key] );
-				}
-			}
+			return whiteSetPieces;
 		}
 
-		public Dictionary<string, Tile> getBoardTiles()
+		/**
+		 * Create black player's pieces with their initial position.
+		 */
+		private Dictionary<Piece, string> defineBlackPiecesLocationOnBoard()
 		{
-			return board.Tiles;
+			Dictionary<Piece, string> blackSetPieces = new Dictionary<Piece, string>();
+			blackSetPieces.Add( new Pawn( PieceID.PawnA ), "A7" );
+			blackSetPieces.Add( new Pawn( PieceID.PawnB ), "B7" );
+			blackSetPieces.Add( new Pawn( PieceID.PawnC ), "C7" );
+			blackSetPieces.Add( new Pawn( PieceID.PawnD ), "D7" );
+			blackSetPieces.Add( new Pawn( PieceID.PawnE ), "E7" );
+			blackSetPieces.Add( new Pawn( PieceID.PawnF ), "F7" );
+			blackSetPieces.Add( new Pawn( PieceID.PawnG ), "G7" );
+			blackSetPieces.Add( new Pawn( PieceID.PawnH ), "H7" );
+			blackSetPieces.Add( new Rook( PieceID.QueensRook ), "A8" );
+			blackSetPieces.Add( new Knight( PieceID.QueensKnight ), "B8" );
+			blackSetPieces.Add( new Bishop( PieceID.QueensBishop ), "C8" );
+			blackSetPieces.Add( new Queen( PieceID.Queen ), "D8" );
+			blackSetPieces.Add( new King( PieceID.King ), "E8" );
+			blackSetPieces.Add( new Bishop( PieceID.KingsBishop ), "F8" );
+			blackSetPieces.Add( new Knight( PieceID.KingsKnight ), "G8" );
+			blackSetPieces.Add( new Rook( PieceID.KingsRook ), "H8" );
+
+			return blackSetPieces;
 		}
+
+		public ArrayList getBoardTiles()
+		{
+			ArrayList list = new ArrayList();
+			foreach( KeyValuePair<string, Tile> entry in board.Tiles )
+			{
+				list.Add( entry.Value.name );
+			}
+
+			return list;
+		}
+
+		public ArrayList getChessPieces()
+		{
+			ArrayList list = new ArrayList();
+
+			// White pieces:
+			foreach( KeyValuePair<Piece, string> entry in white.Pieces )
+			{
+				string[] tuple = { white.Color.ToString(), entry.Key.GetType().Name, entry.Value };
+
+				list.Add( tuple );
+			}
+
+			// Black pieces:
+			foreach( KeyValuePair<Piece, string> entry in black.Pieces )
+			{
+				string[] tuple = { black.Color.ToString(), entry.Key.GetType().Name, entry.Value };
+
+				list.Add( tuple );
+			}
+
+			return list;
+		}
+
 	}
 }
 

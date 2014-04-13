@@ -24,7 +24,7 @@ namespace BitterBloom.ChessGame
 
 		private ChessEngine chess;
 
-		public Main()
+		void Awake()
 		{
 			gof = new GameObjectFactory();
 			chess = new ChessEngine();
@@ -51,13 +51,94 @@ namespace BitterBloom.ChessGame
 		 */
 		private void DrawBoardTiles()
 		{
-			Dictionary<string, Tile> tiles = chess.getBoardTiles();
+			ArrayList tiles = chess.getBoardTiles();
 
-			foreach(KeyValuePair<string, Tile> entry in tiles)
+			foreach( string tileID in tiles )
 			{
-				GameObject tile = gof.buildTile( entry.Value.name, entry.Value.hPosition, entry.Value.vPosition );
-				positionGivenGameObject( tile, new Vector2( entry.Value.hPosition, entry.Value.vPosition ) );
+				Vector2 tilePosition = getPositionFromTileID( tileID );
+
+				GameObject tile = gof.buildTile( tileID, tilePosition );
+				positionGivenGameObject( tile, tilePosition );
+
+				/*
+				if( entry.Value.Piece != null )
+				{
+					GameObject piece = gof.buildChessPiece( entry.Value.Piece.PieceID.ToString() );
+					positionGivenGameObject( piece, new Vector2( entry.Value.hPosition, entry.Value.vPosition ) );
+				}
+				*/
 			}
+		}
+
+		Vector2 getPositionFromTileID( string tileID )
+		{
+			Dictionary<string, Vector2> mapTileToPosition = new Dictionary<string, Vector2>();
+			mapTileToPosition.Add( "A1", new Vector2( 0, 0 ) );
+			mapTileToPosition.Add( "A2", new Vector2( 0, 1 ) );
+			mapTileToPosition.Add( "A3", new Vector2( 0, 2 ) );
+			mapTileToPosition.Add( "A4", new Vector2( 0, 3 ) );
+			mapTileToPosition.Add( "A5", new Vector2( 0, 4 ) );
+			mapTileToPosition.Add( "A6", new Vector2( 0, 5 ) );
+			mapTileToPosition.Add( "A7", new Vector2( 0, 6 ) );
+			mapTileToPosition.Add( "A8", new Vector2( 0, 7 ) );
+			mapTileToPosition.Add( "B1", new Vector2( 1, 0 ) );
+			mapTileToPosition.Add( "B2", new Vector2( 1, 1 ) );
+			mapTileToPosition.Add( "B3", new Vector2( 1, 2 ) );
+			mapTileToPosition.Add( "B4", new Vector2( 1, 3 ) );
+			mapTileToPosition.Add( "B5", new Vector2( 1, 4 ) );
+			mapTileToPosition.Add( "B6", new Vector2( 1, 5 ) );
+			mapTileToPosition.Add( "B7", new Vector2( 1, 6 ) );
+			mapTileToPosition.Add( "B8", new Vector2( 1, 7 ) );
+			mapTileToPosition.Add( "C1", new Vector2( 2, 0 ) );
+			mapTileToPosition.Add( "C2", new Vector2( 2, 1 ) );
+			mapTileToPosition.Add( "C3", new Vector2( 2, 2 ) );
+			mapTileToPosition.Add( "C4", new Vector2( 2, 3 ) );
+			mapTileToPosition.Add( "C5", new Vector2( 2, 4 ) );
+			mapTileToPosition.Add( "C6", new Vector2( 2, 5 ) );
+			mapTileToPosition.Add( "C7", new Vector2( 2, 6 ) );
+			mapTileToPosition.Add( "C8", new Vector2( 2, 7 ) );
+			mapTileToPosition.Add( "D1", new Vector2( 3, 0 ) );
+			mapTileToPosition.Add( "D2", new Vector2( 3, 1 ) );
+			mapTileToPosition.Add( "D3", new Vector2( 3, 2 ) );
+			mapTileToPosition.Add( "D4", new Vector2( 3, 3 ) );
+			mapTileToPosition.Add( "D5", new Vector2( 3, 4 ) );
+			mapTileToPosition.Add( "D6", new Vector2( 3, 5 ) );
+			mapTileToPosition.Add( "D7", new Vector2( 3, 6 ) );
+			mapTileToPosition.Add( "D8", new Vector2( 3, 7 ) );
+			mapTileToPosition.Add( "E1", new Vector2( 4, 0 ) );
+			mapTileToPosition.Add( "E2", new Vector2( 4, 1 ) );
+			mapTileToPosition.Add( "E3", new Vector2( 4, 2 ) );
+			mapTileToPosition.Add( "E4", new Vector2( 4, 3 ) );
+			mapTileToPosition.Add( "E5", new Vector2( 4, 4 ) );
+			mapTileToPosition.Add( "E6", new Vector2( 4, 5 ) );
+			mapTileToPosition.Add( "E7", new Vector2( 4, 6 ) );
+			mapTileToPosition.Add( "E8", new Vector2( 4, 7 ) );
+			mapTileToPosition.Add( "F1", new Vector2( 5, 0 ) );
+			mapTileToPosition.Add( "F2", new Vector2( 5, 1 ) );
+			mapTileToPosition.Add( "F3", new Vector2( 5, 2 ) );
+			mapTileToPosition.Add( "F4", new Vector2( 5, 3 ) );
+			mapTileToPosition.Add( "F5", new Vector2( 5, 4 ) );
+			mapTileToPosition.Add( "F6", new Vector2( 5, 5 ) );
+			mapTileToPosition.Add( "F7", new Vector2( 5, 6 ) );
+			mapTileToPosition.Add( "F8", new Vector2( 5, 7 ) );
+			mapTileToPosition.Add( "G1", new Vector2( 6, 0 ) );
+			mapTileToPosition.Add( "G2", new Vector2( 6, 1 ) );
+			mapTileToPosition.Add( "G3", new Vector2( 6, 2 ) );
+			mapTileToPosition.Add( "G4", new Vector2( 6, 3 ) );
+			mapTileToPosition.Add( "G5", new Vector2( 6, 4 ) );
+			mapTileToPosition.Add( "G6", new Vector2( 6, 5 ) );
+			mapTileToPosition.Add( "G7", new Vector2( 6, 6 ) );
+			mapTileToPosition.Add( "G8", new Vector2( 6, 7 ) );
+			mapTileToPosition.Add( "H1", new Vector2( 7, 0 ) );
+			mapTileToPosition.Add( "H2", new Vector2( 7, 1 ) );
+			mapTileToPosition.Add( "H3", new Vector2( 7, 2 ) );
+			mapTileToPosition.Add( "H4", new Vector2( 7, 3 ) );
+			mapTileToPosition.Add( "H5", new Vector2( 7, 4 ) );
+			mapTileToPosition.Add( "H6", new Vector2( 7, 5 ) );
+			mapTileToPosition.Add( "H7", new Vector2( 7, 6 ) );
+			mapTileToPosition.Add( "H8", new Vector2( 7, 7 ) );
+
+			return mapTileToPosition[tileID];
 		}
 
 		/**
@@ -74,64 +155,17 @@ namespace BitterBloom.ChessGame
 
 		private void DrawBoardPieces()
 		{
-			/**
-			 * Algebraic notation for pieces:
-			 * K: King
-			 * Q: Queen
-			 * R: Rook
-			 * B: Bishop
-			 * N: Knight
-			 * P: Pawn
-			 */
+			foreach( string[] pieceInfo in chess.getChessPieces() )
+			{
+				string color = pieceInfo[0];
+				string pieceID = pieceInfo[1];
+				string coord = pieceInfo[2];
+				Debug.Log( color + '-' + pieceID + '-' + coord );
+				Vector2 tilePosition = getPositionFromTileID( coord );
 
-			//gof.buildChessPiece("W_P1");
-
-			Sprite[] chessPieces = Resources.LoadAll<Sprite>( "Sprites/pieces-sprite" );
-
-			// White side:
-			GameObject whitePawn1 = new GameObject( "W_P1" );
-			whitePawn1.AddComponent<SpriteRenderer>();
-			whitePawn1.GetComponent<SpriteRenderer>().sprite = chessPieces[0];
-			whitePawn1.transform.position = new Vector3( 0.0f, 1.0f, 0.0f );
-
-			GameObject whitePawn2 = new GameObject( "W_P2" );
-			whitePawn2.AddComponent<SpriteRenderer>();
-			whitePawn2.GetComponent<SpriteRenderer>().sprite = chessPieces[0];
-			whitePawn2.transform.position = new Vector3( 1.0f, 1.0f, 0.0f );
-
-			GameObject whitePawn3 = new GameObject( "W_P3" );
-			whitePawn3.AddComponent<SpriteRenderer>();
-			whitePawn3.GetComponent<SpriteRenderer>().sprite = chessPieces[0];
-			whitePawn3.transform.position = new Vector3( 2.0f, 1.0f, 0.0f );
-
-			GameObject whitePawn4 = new GameObject( "W_P4" );
-			whitePawn4.AddComponent<SpriteRenderer>();
-			whitePawn4.GetComponent<SpriteRenderer>().sprite = chessPieces[0];
-			whitePawn4.transform.position = new Vector3( 3.0f, 1.0f, 0.0f );
-
-			GameObject whitePawn5 = new GameObject( "W_P5" );
-			whitePawn5.AddComponent<SpriteRenderer>();
-			whitePawn5.GetComponent<SpriteRenderer>().sprite = chessPieces[0];
-			whitePawn5.transform.position = new Vector3( 4.0f, 1.0f, 0.0f );
-
-			GameObject whitePawn6 = new GameObject( "W_P6" );
-			whitePawn6.AddComponent<SpriteRenderer>();
-			whitePawn6.GetComponent<SpriteRenderer>().sprite = chessPieces[0];
-			whitePawn6.transform.position = new Vector3( 5.0f, 1.0f, 0.0f );
-
-			GameObject whitePawn7 = new GameObject( "W_P7" );
-			whitePawn7.AddComponent<SpriteRenderer>();
-			whitePawn7.GetComponent<SpriteRenderer>().sprite = chessPieces[0];
-			whitePawn7.transform.position = new Vector3( 6.0f, 1.0f, 0.0f );
-
-			GameObject whitePawn8 = new GameObject( "W_P8" );
-			whitePawn8.AddComponent<SpriteRenderer>();
-			whitePawn8.GetComponent<SpriteRenderer>().sprite = chessPieces[0];
-			whitePawn8.transform.position = new Vector3( 7.0f, 1.0f, 0.0f );
-
-			// Black side:
-			//GameObject blackKing = new GameObject( "B_King" );
-			//			GameObject blackQueen = new GameObject( "B_Queen" );
+				GameObject piece = gof.buildChessPiece( color, pieceID );
+				positionGivenGameObject( piece, tilePosition );
+			}
 		}
 
 		/**

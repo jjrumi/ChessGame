@@ -1,5 +1,4 @@
-﻿
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,19 +24,10 @@ namespace BitterBloom.ChessGame.Engine.Tests
 		}
 
 		[Test()]
-		public void Initialized_Board_Has_Tiles_Ordered()
-		{
-			Dictionary<string, Tile> tiles = board.Tiles;
-
-			Assert.IsTrue( 0 == tiles["A1"].hPosition && 0 == tiles["A1"].vPosition, "First tile 'A1' is located at [0,0]" );
-			Assert.IsTrue( 7 == tiles["H8"].hPosition && 7 == tiles["H8"].vPosition, "Last tile 'H8' is located at [7,7]" );
-		}
-
-		[Test()]
 		public void Can_Place_Piece_On_An_Empty_Tile_Of_The_Board()
 		{
 			board.PlacePiece( new Pawn( ChessEngine.PieceID.PawnA ), "A2" );
-			Assert.IsFalse( board.Tiles["A2"].isEmpty(), "Piece placed and board tile not empty" );
+			Assert.IsFalse( board.Tiles["A2"].IsEmpty(), "Piece placed and board tile not empty" );
 		}
 
 		[Test()]
