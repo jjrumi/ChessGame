@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using NUnit.Framework;
 using System;
 using System.Collections;
@@ -9,22 +9,43 @@ namespace BitterBloom.ChessGame.Engine.Tests
 	[TestFixture()]
 	public class BoardTest
 	{
+		private Board board;
+
+		[SetUp]
+		public void Init()
+		{
+			board = new Board();
+			board.Initialize();
+		}
+
 		[Test()]
 		public void Initialized_Board_Has_All_Necessary_Tiles()
 		{
-			Board board = new Board();
-			board.Initialize();
+			Assert.AreEqual( 64, board.Tiles.Count, "Board has 64 tiles" );
+		}
 
-			List<Tile> tiles = board.getTiles();
-			Tile firstTile = ( tiles[0] as Tile );
-			Tile lastTile = ( tiles[tiles.Count - 1] as Tile );
+		[Test()]
+		public void Initialized_Board_Has_Tiles_Ordered()
+		{
+			Dictionary<string, Tile> tiles = board.Tiles;
 
-			Assert.AreEqual( 64, tiles.Count, "Board has 64 tiles" );
-			Assert.AreEqual( "A1", firstTile.name, "First tile is A1" );
-			Assert.IsTrue( 0 == firstTile.hPosition && 0 == firstTile.vPosition, "First tile is located at [0,0]" );
-			Assert.AreEqual( "H8", lastTile.name, "Last tile is H8" );
-			Assert.IsTrue( 7 == lastTile.hPosition && 7 == lastTile.vPosition, "First tile is located at [7,7]" );
+			Assert.IsTrue( 0 == tiles["A1"].hPosition && 0 == tiles["A1"].vPosition, "First tile 'A1' is located at [0,0]" );
+			Assert.IsTrue( 7 == tiles["H8"].hPosition && 7 == tiles["H8"].vPosition, "Last tile 'H8' is located at [7,7]" );
+		}
+
+		[Test()]
+		public void Can_Place_Piece_On_An_Empty_Tile_Of_The_Board()
+		{
+			board.PlacePiece( new Pawn( ChessEngine.PieceID.PawnA ), "A2" );
+			Assert.IsFalse( board.Tiles["A2"].isEmpty(), "Piece placed and board tile not empty" );
+		}
+
+		[Test()]
+		[ExpectedException( typeof( Board.TargetTileOccupiedException ) )]
+		public void Cannot_Place_Piece_On_An_Occupied_Tile_Of_The_Board()
+		{
+			board.PlacePiece( new Pawn( ChessEngine.PieceID.PawnA ), "A2" );
+			board.PlacePiece( new Rook( ChessEngine.PieceID.QueensRook ), "A2" );
 		}
 	}
 }
-*/

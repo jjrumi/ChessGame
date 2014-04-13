@@ -36,12 +36,14 @@ namespace BitterBloom.ChessGame
 		void Start() 
 		{
 			chess.Initialize();
-			DrawBoardTiles();
+			DrawScene();
+			PlaceCamera();
+		}
 
+		private void DrawScene()
+		{
+			DrawBoardTiles();
 			DrawBoardPieces();
-					
-			// Point the camera to the center of the board.
-			Camera.main.transform.position = new Vector3( 3.5f, 3.5f, -10f );
 		}
 
 		/**
@@ -49,21 +51,21 @@ namespace BitterBloom.ChessGame
 		 */
 		private void DrawBoardTiles()
 		{
-			List<Tile> tiles = chess.getBoardTiles();
+			Dictionary<string, Tile> tiles = chess.getBoardTiles();
 
-			for( int i = 0; i<tiles.Count; i++ )
+			foreach(KeyValuePair<string, Tile> entry in tiles)
 			{
-				GameObject tile = gof.buildTile( tiles[i].name, tiles[i].hPosition, tiles[i].vPosition );
-				positionGivenGameObject( tile, new Vector2( tiles[i].hPosition, tiles[i].vPosition ) );
+				GameObject tile = gof.buildTile( entry.Value.name, entry.Value.hPosition, entry.Value.vPosition );
+				positionGivenGameObject( tile, new Vector2( entry.Value.hPosition, entry.Value.vPosition ) );
 			}
 		}
 
 		/**
-		 * Place the given tile object in the given X & Y positions.
+		 * Place the given object to the given position.
 		 */
-		private void positionGivenGameObject( GameObject tile, Vector2 position )
+		private void positionGivenGameObject( GameObject go, Vector2 position )
 		{
-			tile.transform.position = new Vector3(
+			go.transform.position = new Vector3(
 				position.x,
 				position.y,
 				1.0f
@@ -130,6 +132,14 @@ namespace BitterBloom.ChessGame
 			// Black side:
 			//GameObject blackKing = new GameObject( "B_King" );
 			//			GameObject blackQueen = new GameObject( "B_Queen" );
+		}
+
+		/**
+		 * Point the camera to the center of the board.
+		 */
+		private void PlaceCamera()
+		{
+			Camera.main.transform.position = new Vector3( 3.5f, 3.5f, -10f );
 		}
 
 		/**

@@ -4,9 +4,12 @@ namespace BitterBloom.ChessGame.Engine
 {
 	public interface Piece
 	{
-		string getPieceType();
+		//string getPieceType();
 
-		string getPieceID();
+		ChessEngine.PieceID PieceID
+		{
+			get;
+		}
 	}
 }
 

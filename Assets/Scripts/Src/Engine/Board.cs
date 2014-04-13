@@ -6,17 +6,22 @@ namespace BitterBloom.ChessGame.Engine
 {
 	public class Board
 	{
-		private List<Tile> tiles;
+		private Dictionary<string, Tile> tiles;
 
 		public Board()
 		{
-			tiles = new List<Tile>();
+			tiles = new Dictionary<string, Tile>();
+		}
+
+		public void Initialize()
+		{
+			createTiles();
 		}
 
 		/**
 		 * Populate tiles list with Tile objects and define their name and position in the board.
 		 */
-		public void Initialize()
+		private void createTiles()
 		{
 			string[] horizontalTiles	= new string[] { "A", "B", "C", "D", "E", "F", "G", "H" };
 			string[] verticalTiles		= new string[] { "1", "2", "3", "4", "5", "6", "7", "8" };
@@ -28,7 +33,7 @@ namespace BitterBloom.ChessGame.Engine
 				foreach( string vTile in verticalTiles )
 				{
 					string tileName = hTile + vTile;
-					tiles.Add( new Tile( tileName, hPosition, vPosition ) );
+					tiles.Add( tileName, new Tile( tileName, hPosition, vPosition ) );
 
 					++vPosition;
 				}
@@ -37,9 +42,24 @@ namespace BitterBloom.ChessGame.Engine
 			}
 		}
 
-		public List<Tile> getTiles()
+		/**
+		 * Place a piece on the given coordinate of the board.
+		 */
+		public void PlacePiece( Piece piece, string coordinates )
 		{
-			return this.tiles;
+			if( !tiles[coordinates].isEmpty() )
+			{
+				throw new TargetTileOccupiedException();
+			}
+
+			tiles[coordinates].placePiece( piece );
 		}
+
+		public Dictionary<string, Tile> Tiles
+		{
+			get{ return this.tiles; }
+		}
+
+		public class TargetTileOccupiedException : ApplicationException{}
 	}
 }
