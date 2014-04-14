@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using BitterBloom.ChessGame.Engine;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using BitterBloom.ChessGame.Engine;
 
 namespace BitterBloom.ChessGame
 {

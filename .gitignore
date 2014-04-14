@@ -6,6 +6,11 @@ Obj/
 UnityGenerated/
 Library/
 
+# ================ #
+# Unity Test Tools
+# ================ #
+Assets/UnityTestTools
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
