@@ -1,4 +1,5 @@
 ﻿using System;
+using BitterBloom.ChessGame.Engine.Pieces;
 
 namespace BitterBloom.ChessGame.Engine
 {

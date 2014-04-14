@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BitterBloom.ChessGame.Engine
+namespace BitterBloom.ChessGame.Engine.Pieces
 {
 	public interface Piece
 	{

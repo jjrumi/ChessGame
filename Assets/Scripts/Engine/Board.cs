@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic; 
+using System.Collections.Generic;
+using BitterBloom.ChessGame.Engine.Pieces; 
 
 namespace BitterBloom.ChessGame.Engine
 {
-	public class Board
+	public class Board : IBoard
 	{
 		private Dictionary<string, Tile> tiles;
 
@@ -55,6 +56,20 @@ namespace BitterBloom.ChessGame.Engine
 			{
 				PlacePiece( entry.Key, entry.Value );
 			}
+		}
+
+		/**
+		 * List tiles information: [TileID].
+		 */
+		public ArrayList ListBoardTiles()
+		{
+			ArrayList list = new ArrayList();
+			foreach( KeyValuePair<string, Tile> entry in tiles )
+			{
+				list.Add( entry.Value.name );
+			}
+
+			return list;
 		}
 
 		public Dictionary<string, Tile> Tiles

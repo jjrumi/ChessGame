@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using BitterBloom.ChessGame.Engine.Pieces;
 
 namespace BitterBloom.ChessGame.Engine.Tests
 {

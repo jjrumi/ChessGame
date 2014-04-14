@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using BitterBloom.ChessGame.Engine.Pieces;
 
 namespace BitterBloom.ChessGame.Engine
 {
@@ -13,15 +14,15 @@ namespace BitterBloom.ChessGame.Engine
 			QueensRook,	QueensKnight,	QueensBishop,	Queen,	King,	KingsBishop,	KingsKnight,	KingsRook
 		};
 
-		private Board board;
-		private Player white;
-		private Player black;
+		private IBoard board;
+		private IPlayer white;
+		private IPlayer black;
 
-		public ChessEngine()
+		public ChessEngine( IBoard board, IPlayer white, IPlayer black )
 		{
-			board = new Board();
-			white = new Player( PlayerColor.White );
-			black = new Player( PlayerColor.Black );
+			this.board = board;
+			this.white = white;
+			this.black = black;
 		}
 
 		/**
@@ -90,40 +91,21 @@ namespace BitterBloom.ChessGame.Engine
 			return blackSetPieces;
 		}
 
-		public ArrayList getBoardTiles()
+		public ArrayList GetBoardTiles()
 		{
-			ArrayList list = new ArrayList();
-			foreach( KeyValuePair<string, Tile> entry in board.Tiles )
-			{
-				list.Add( entry.Value.name );
-			}
-
-			return list;
+			return board.ListBoardTiles();
 		}
 
-		public ArrayList getChessPieces()
+		public ArrayList GetChessPieces()
 		{
-			ArrayList list = new ArrayList();
+			ArrayList whitePieces = white.ListPieces();
+			ArrayList blackPieces = black.ListPieces();
+			ArrayList mergedList = new ArrayList();
+			mergedList.AddRange( whitePieces );
+			mergedList.AddRange( blackPieces );
 
-			// White pieces:
-			foreach( KeyValuePair<Piece, string> entry in white.Pieces )
-			{
-				string[] tuple = { white.Color.ToString(), entry.Key.GetType().Name, entry.Value };
-
-				list.Add( tuple );
-			}
-
-			// Black pieces:
-			foreach( KeyValuePair<Piece, string> entry in black.Pieces )
-			{
-				string[] tuple = { black.Color.ToString(), entry.Key.GetType().Name, entry.Value };
-
-				list.Add( tuple );
-			}
-
-			return list;
+			return mergedList;
 		}
-
 	}
 }
 

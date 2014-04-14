@@ -27,7 +27,8 @@ namespace BitterBloom.ChessGame
 		void Awake()
 		{
 			gof = new GameObjectFactory();
-			chess = new ChessEngine();
+
+			chess = BootstrapEngine.Execute();
 		}
 
 		/**
@@ -51,7 +52,7 @@ namespace BitterBloom.ChessGame
 		 */
 		private void DrawBoardTiles()
 		{
-			ArrayList tiles = chess.getBoardTiles();
+			ArrayList tiles = chess.GetBoardTiles();
 
 			foreach( string tileID in tiles )
 			{
@@ -155,7 +156,7 @@ namespace BitterBloom.ChessGame
 
 		private void DrawBoardPieces()
 		{
-			foreach( string[] pieceInfo in chess.getChessPieces() )
+			foreach( string[] pieceInfo in chess.GetChessPieces() )
 			{
 				string color = pieceInfo[0];
 				string pieceID = pieceInfo[1];
