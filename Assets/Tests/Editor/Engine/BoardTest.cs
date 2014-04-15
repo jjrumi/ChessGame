@@ -81,5 +81,16 @@ namespace BitterBloom.ChessGame.Engine.Tests
 			tileA1Mock.Verify( x => x.PlacePiece( It.IsAny<Piece>() ), Times.Once() );
 			tileB1Mock.Verify( x => x.PlacePiece( It.IsAny<Piece>() ), Times.Once() );
 		}
+
+		[Test()]
+		public void Board_Publish_List_Of_Tile_Names()
+		{
+			string firstCoord = hCoord[0] + vCoord[0];
+			string lastCoord = hCoord[hCoord.Length - 1] + vCoord[vCoord.Length - 1];
+
+			ArrayList list = board.ListBoardTiles();
+			Assert.That( list.Contains( firstCoord ) );
+			Assert.That( list.Contains( lastCoord ) );
+		}
 	}
 }
