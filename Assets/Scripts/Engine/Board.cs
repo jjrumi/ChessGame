@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using BitterBloom.ChessGame.Engine.Pieces; 
+using BitterBloom.ChessGame.Engine.Pieces;
 
 namespace BitterBloom.ChessGame.Engine
 {
@@ -24,8 +24,8 @@ namespace BitterBloom.ChessGame.Engine
 		 */
 		private void CreateTiles()
 		{
-			string[] horizontalTiles	= new string[] { "A", "B", "C", "D", "E", "F", "G", "H" };
-			string[] verticalTiles		= new string[] { "1", "2", "3", "4", "5", "6", "7", "8" };
+			string[] horizontalTiles = new string[] { "A", "B", "C", "D", "E", "F", "G", "H" };
+			string[] verticalTiles = new string[] { "1", "2", "3", "4", "5", "6", "7", "8" };
 
 			foreach( string hTile in horizontalTiles )
 			{
@@ -72,11 +72,12 @@ namespace BitterBloom.ChessGame.Engine
 			return list;
 		}
 
-		public Dictionary<string, Tile> Tiles
-		{
+		public Dictionary<string, Tile> Tiles {
 			get{ return this.tiles; }
 		}
 
-		public class TargetTileOccupiedException : ApplicationException{}
+		public class TargetTileOccupiedException : ApplicationException
+		{
+		}
 	}
 }

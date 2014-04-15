@@ -13,7 +13,6 @@ namespace BitterBloom.ChessGame.Engine
 		public Player( ChessEngine.PlayerColor color )
 		{
 			this.color = color;
-			setPieces = null;
 		}
 
 		/**
@@ -22,23 +21,21 @@ namespace BitterBloom.ChessGame.Engine
 		public ArrayList ListPieces()
 		{
 			ArrayList list = new ArrayList();
+			System.Console.WriteLine( setPieces.Count );
 			foreach( KeyValuePair<Piece, string> entry in setPieces )
 			{
 				string[] tuple = { color.ToString(), entry.Key.GetType().Name, entry.Value };
-
 				list.Add( tuple );
 			}
 
-			return list;
+			return list; 
 		}
 
-		public ChessEngine.PlayerColor Color
-		{
+		public ChessEngine.PlayerColor Color { 
 			get{ return this.color; }
 		}
 
-		public Dictionary<Piece, string> Pieces
-		{
+		public Dictionary<Piece, string> Pieces {
 			get{ return this.setPieces; }
 			set{ this.setPieces = value; }
 		}

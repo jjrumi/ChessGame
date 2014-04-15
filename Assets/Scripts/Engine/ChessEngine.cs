@@ -7,12 +7,31 @@ namespace BitterBloom.ChessGame.Engine
 {
 	public class ChessEngine
 	{
-		public enum PlayerColor { White, Black };
-
-		public enum PieceID { 
-			PawnA, 		PawnB,			PawnC,			PawnD,	PawnE,	PawnF,			PawnG,			PawnH, 
-			QueensRook,	QueensKnight,	QueensBishop,	Queen,	King,	KingsBishop,	KingsKnight,	KingsRook
-		};
+		public enum PlayerColor
+		{
+			White,
+			Black
+		}
+		// TODO: Is it really necessary to ID all the pieces. Should it suffice with just the types?
+		public enum PieceID
+		{
+			PawnA,
+			PawnB,
+			PawnC,
+			PawnD,
+			PawnE,
+			PawnF,
+			PawnG,
+			PawnH,
+			QueensRook,
+			QueensKnight,
+			QueensBishop,
+			Queen,
+			King,
+			KingsBishop,
+			KingsKnight,
+			KingsRook
+		}
 
 		private IBoard board;
 		private IPlayer white;
@@ -26,7 +45,7 @@ namespace BitterBloom.ChessGame.Engine
 		}
 
 		/**
-		 * Setup board, tiles and pieces logic.
+		 * Setup board, pieces and links them to board and players.
 		 */
 		public void Initialize()
 		{
