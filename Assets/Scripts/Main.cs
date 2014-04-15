@@ -5,28 +5,18 @@ using BitterBloom.ChessGame.Engine;
 
 namespace BitterBloom.ChessGame
 {
-	/**
-	 * TODO:
-	 * - Think about the design of the ChessGame.Engine part.
-	 * 		- This must be developed with TDD.
-	 * 		- Look for some design patterns.
-	 * 		- Read external sources like http://www.daedtech.com/tdd-and-modeling-a-chess-game & http://www.hawkit.co.nz/pitofdev/tdd-chess-introduction/
-	 * 		- Implement simple movement validation.
-	 * - Build the pieces of the board
-	 * 		- Import chess pieces.
-	 * 		- Load them into the game.
-	 * - Implement a very simple torn to have two players.
-	 * - 
-	 */
 	public class Main : MonoBehaviour
 	{
 		private GameObjectFactory gof;
-		private ChessEngine chess;
+		public ChessEngine chess;
+		public static string[] Move;
 
 		void Awake()
 		{
 			gof = new GameObjectFactory();
 			chess = BootstrapEngine.Execute();
+
+			Move = new string[]{ "", "" };
 		}
 
 		/**
@@ -151,11 +141,9 @@ namespace BitterBloom.ChessGame
 				string color = pieceInfo[0];
 				string pieceID = pieceInfo[1];
 				string coord = pieceInfo[2];
-				Debug.Log( color + '-' + pieceID + '-' + coord );
-				Vector2 tilePosition = getPositionFromTileID( coord );
 
 				GameObject piece = gof.buildChessPiece( color, pieceID );
-				positionGivenGameObject( piece, tilePosition );
+				positionGivenGameObject( piece, getPositionFromTileID( coord ) );
 			}
 		}
 
@@ -165,14 +153,6 @@ namespace BitterBloom.ChessGame
 		private void PlaceCamera()
 		{
 			Camera.main.transform.position = new Vector3( 3.5f, 3.5f, -10f );
-		}
-
-		/**
-		 * Update is called once per frame
-		 */
-		void Update()
-		{
-		
 		}
 	}
 }

@@ -7,6 +7,8 @@ namespace BitterBloom.ChessGame.Engine
 	{
 		void PlacePiece( Piece piece );
 
+		Piece RemovePiece();
+
 		bool IsEmpty();
 
 		string Name { get; }

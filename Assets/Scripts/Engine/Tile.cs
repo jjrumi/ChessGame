@@ -18,6 +18,14 @@ namespace BitterBloom.ChessGame.Engine
 			this.piece = piece;
 		}
 
+		public Piece RemovePiece()
+		{
+			Piece poppedPiece = this.piece;
+			this.piece = null;
+
+			return poppedPiece;
+		}
+
 		public bool IsEmpty()
 		{
 			return this.piece == null;

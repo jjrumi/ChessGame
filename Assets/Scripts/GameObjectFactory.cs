@@ -37,6 +37,8 @@ namespace BitterBloom.ChessGame
 
 			tile.AddComponent<MeshRenderer>();
 			tile.AddComponent<MeshFilter>().mesh = MeshGenerator.CreatePlaneMesh( tile.name, tileSize, tileSize );
+			tile.AddComponent<TileInteractor>();
+			tile.AddComponent<BoxCollider2D>();
 		}
 
 		/**

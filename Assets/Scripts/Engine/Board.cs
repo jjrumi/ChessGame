@@ -51,6 +51,17 @@ namespace BitterBloom.ChessGame.Engine
 			tiles[coord].PlacePiece( piece );
 		}
 
+		public Piece RemovePiece( string coord )
+		{
+			if( IsTileEmpty( coord ) )
+			{
+				throw new TargetTileEmptyException();
+			}
+
+			Piece poppedPiece = tiles[coord].RemovePiece();
+			return poppedPiece;
+		}
+
 		/**
 		 * Given a collection of [Piece => coord], place the pieces on the board.
 		 */
@@ -82,6 +93,10 @@ namespace BitterBloom.ChessGame.Engine
 		}
 
 		public class TargetTileOccupiedException : ApplicationException
+		{
+		}
+
+		public class TargetTileEmptyException : ApplicationException
 		{
 		}
 	}

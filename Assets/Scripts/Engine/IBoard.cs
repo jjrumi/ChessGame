@@ -11,6 +11,8 @@ namespace BitterBloom.ChessGame.Engine
 
 		void PlacePiece( Piece piece, string coordinates );
 
+		Piece RemovePiece( string coord );
+
 		void PlaceCollectionOfPieces( Dictionary<Piece, string> setPieces );
 
 		ArrayList ListBoardTiles();
