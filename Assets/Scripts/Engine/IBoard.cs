@@ -7,11 +7,11 @@ namespace BitterBloom.ChessGame.Engine
 {
 	public interface IBoard
 	{
-		void Initialize();
+		void Initialize( string[] horizontalCoords, string[] verticalCoords );
 
 		void PlacePiece( Piece piece, string coordinates );
 
-		void PlaceListOfPieces( Dictionary<Piece, string> setPieces );
+		void PlaceCollectionOfPieces( Dictionary<Piece, string> setPieces );
 
 		ArrayList ListBoardTiles();
 	}

@@ -7,29 +7,22 @@ namespace BitterBloom.ChessGame.Engine
 {
 	public class Board : IBoard
 	{
-		private Dictionary<string, Tile> tiles;
+		private Dictionary<string, ITile> tiles;
 
-		public Board()
+		public void Initialize( string[] horizontalCoords, string[] verticalCoords )
 		{
-			tiles = new Dictionary<string, Tile>();
-		}
-
-		public void Initialize()
-		{
-			CreateTiles();
+			CreateTiles( horizontalCoords, verticalCoords );
 		}
 
 		/**
 		 * Populate tiles list with Tile objects and define their unique name: A1, A2, ..., C3, ..., H8.
 		 */
-		private void CreateTiles()
+		private void CreateTiles( string[] horizontalCoords, string[] verticalCoords )
 		{
-			string[] horizontalTiles = new string[] { "A", "B", "C", "D", "E", "F", "G", "H" };
-			string[] verticalTiles = new string[] { "1", "2", "3", "4", "5", "6", "7", "8" };
-
-			foreach( string hTile in horizontalTiles )
+			tiles = new Dictionary<string, ITile>();
+			foreach( string hTile in horizontalCoords )
 			{
-				foreach( string vTile in verticalTiles )
+				foreach( string vTile in verticalCoords )
 				{
 					string tileName = hTile + vTile;
 					tiles.Add( tileName, new Tile( tileName ) );
@@ -38,19 +31,30 @@ namespace BitterBloom.ChessGame.Engine
 		}
 
 		/**
+		 * Checks if the tile for the given coord has a linked piece.
+		 */
+		public bool IsTileEmpty( string coord )
+		{
+			return tiles[coord].IsEmpty();
+		}
+
+		/**
 		 * Place a piece on the given coordinate of the board.
 		 */
-		public void PlacePiece( Piece piece, string coordinates )
+		public void PlacePiece( Piece piece, string coord )
 		{
-			if( !tiles[coordinates].IsEmpty() )
+			if( !IsTileEmpty( coord ) )
 			{
 				throw new TargetTileOccupiedException();
 			}
 
-			tiles[coordinates].PlacePiece( piece );
+			tiles[coord].PlacePiece( piece );
 		}
 
-		public void PlaceListOfPieces( Dictionary<Piece, string> setPieces )
+		/**
+		 * Given a collection of [Piece => coord], place the pieces on the board.
+		 */
+		public void PlaceCollectionOfPieces( Dictionary<Piece, string> setPieces )
 		{
 			foreach( KeyValuePair<Piece, string> entry in setPieces )
 			{
@@ -64,16 +68,17 @@ namespace BitterBloom.ChessGame.Engine
 		public ArrayList ListBoardTiles()
 		{
 			ArrayList list = new ArrayList();
-			foreach( KeyValuePair<string, Tile> entry in tiles )
+			foreach( KeyValuePair<string, ITile> entry in tiles )
 			{
-				list.Add( entry.Value.name );
+				list.Add( entry.Value.Name );
 			}
 
 			return list;
 		}
 
-		public Dictionary<string, Tile> Tiles {
+		public Dictionary<string, ITile> Tiles {
 			get{ return this.tiles; }
+			set{ this.tiles = value; }
 		}
 
 		public class TargetTileOccupiedException : ApplicationException

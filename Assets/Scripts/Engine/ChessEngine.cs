@@ -25,11 +25,11 @@ namespace BitterBloom.ChessGame.Engine
 		 */
 		public void Initialize()
 		{
-			board.Initialize();
+			board.Initialize( config.ListHorizontalBoardCoordinates(), config.ListVerticalBoardCoordinates() );
 			Dictionary<Piece, string> whitePieces = config.ListClassicLocationForWhitePieces();
 			Dictionary<Piece, string> blackPieces = config.ListClassicLocationForBlackPieces();
-			board.PlaceListOfPieces( whitePieces );
-			board.PlaceListOfPieces( blackPieces );
+			board.PlaceCollectionOfPieces( whitePieces );
+			board.PlaceCollectionOfPieces( blackPieces );
 			white.Pieces = whitePieces;
 			black.Pieces = blackPieces;
 		}

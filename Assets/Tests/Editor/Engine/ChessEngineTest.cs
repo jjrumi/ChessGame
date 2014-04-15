@@ -15,10 +15,14 @@ namespace BitterBloom.ChessGame.Engine.Tests
 		[Test()]
 		public void Initialized_Chess_Has_A_Board_Initialized()
 		{
+			ConfigChess config = new ConfigChess();
 			var boardMock = new Mock<IBoard>();
+			boardMock.Setup( x => x.Initialize( config.ListHorizontalBoardCoordinates(), config.ListVerticalBoardCoordinates() ) );
+
 			chess = new ChessEngine( boardMock.Object, new Player( Player.PlayerColor.White ), new Player( Player.PlayerColor.Black ), new ConfigChess() );
 			chess.Initialize();
-			boardMock.Verify( x => x.Initialize() );
+
+			boardMock.Verify();
 		}
 
 		[Test()]
@@ -27,7 +31,7 @@ namespace BitterBloom.ChessGame.Engine.Tests
 			Mock<IBoard> boardMock = new Mock<IBoard>();
 			chess = new ChessEngine( boardMock.Object, new Player( Player.PlayerColor.White ), new Player( Player.PlayerColor.Black ), new ConfigChess() );
 			chess.Initialize();
-			boardMock.Verify( x => x.PlaceListOfPieces( It.IsAny<Dictionary<Piece, string>>() ), Times.Exactly( 2 ) );
+			boardMock.Verify( x => x.PlaceCollectionOfPieces( It.IsAny<Dictionary<Piece, string>>() ), Times.Exactly( 2 ) );
 		}
 
 		[Test()]

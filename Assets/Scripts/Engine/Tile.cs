@@ -3,15 +3,14 @@ using BitterBloom.ChessGame.Engine.Pieces;
 
 namespace BitterBloom.ChessGame.Engine
 {
-	public class Tile
+	public class Tile : ITile
 	{
-		public string name;
+		private string name;
 		private Piece piece;
 
 		public Tile( string name )
 		{
 			this.name = name;
-			this.piece = null;
 		}
 
 		public void PlacePiece( Piece piece )
@@ -22,6 +21,10 @@ namespace BitterBloom.ChessGame.Engine
 		public bool IsEmpty()
 		{
 			return this.piece == null;
+		}
+
+		public string Name { 
+			get{ return this.name; }
 		}
 	}
 }
