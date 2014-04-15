@@ -27,7 +27,6 @@ namespace BitterBloom.ChessGame.Engine
 		public ArrayList ListPieces()
 		{
 			ArrayList list = new ArrayList();
-			System.Console.WriteLine( setPieces.Count );
 			foreach( KeyValuePair<Piece, string> entry in setPieces )
 			{
 				string[] tuple = { color.ToString(), entry.Key.GetType().Name, entry.Value };
