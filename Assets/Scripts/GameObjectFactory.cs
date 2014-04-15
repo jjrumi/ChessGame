@@ -44,7 +44,7 @@ namespace BitterBloom.ChessGame
 		 */
 		private void attachMaterialToTile( GameObject tile, float tileIndex )
 		{
-			tile.renderer.material = ( tileIndex  % 2 ) == 0 ? tileMaterials[0] : tileMaterials[1];
+			tile.renderer.material = ( tileIndex % 2 ) == 0 ? tileMaterials[0] : tileMaterials[1];
 		}
 
 		public GameObject buildChessPiece( string color, string pieceType )
@@ -54,6 +54,7 @@ namespace BitterBloom.ChessGame
 
 			int spriteIndex = getSpritePositionFromPieceColorAndType( color, pieceType );
 			piece.GetComponent<SpriteRenderer>().sprite = chessPiecesSprite[spriteIndex];
+			piece.transform.localScale += new Vector3( 0.4f, 0.4f, 0 );
 
 			return piece;
 		}
@@ -75,7 +76,7 @@ namespace BitterBloom.ChessGame
 			mapPieceInfoToSprite.Add( "Black_Queen", 10 );
 			mapPieceInfoToSprite.Add( "Black_King", 11 );
 
-			return mapPieceInfoToSprite[color+'_'+type];
+			return mapPieceInfoToSprite[color + '_' + type];
 		}
 	}
 }
