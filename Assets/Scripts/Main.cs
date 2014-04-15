@@ -21,20 +21,18 @@ namespace BitterBloom.ChessGame
 	public class Main : MonoBehaviour
 	{
 		private GameObjectFactory gof;
-
 		private ChessEngine chess;
 
 		void Awake()
 		{
 			gof = new GameObjectFactory();
-
 			chess = BootstrapEngine.Execute();
 		}
 
 		/**
 		 * Use this for initialization
 		 */
-		void Start() 
+		void Start()
 		{
 			chess.Initialize();
 			DrawScene();
@@ -60,14 +58,6 @@ namespace BitterBloom.ChessGame
 
 				GameObject tile = gof.buildTile( tileID, tilePosition );
 				positionGivenGameObject( tile, tilePosition );
-
-				/*
-				if( entry.Value.Piece != null )
-				{
-					GameObject piece = gof.buildChessPiece( entry.Value.Piece.PieceID.ToString() );
-					positionGivenGameObject( piece, new Vector2( entry.Value.hPosition, entry.Value.vPosition ) );
-				}
-				*/
 			}
 		}
 

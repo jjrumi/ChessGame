@@ -4,15 +4,14 @@ namespace BitterBloom.ChessGame.Engine.Pieces
 {
 	public class Rook : Piece
 	{
-		private ChessEngine.PieceID pieceID;
+		private ConfigChess.PieceID pieceID;
 
-		public Rook( ChessEngine.PieceID pieceID )
+		public Rook( ConfigChess.PieceID pieceID )
 		{
 			this.pieceID = pieceID;
 		}
 
-		public ChessEngine.PieceID PieceID
-		{
+		public ConfigChess.PieceID PieceID {
 			get{ return this.pieceID; }
 		}
 	}

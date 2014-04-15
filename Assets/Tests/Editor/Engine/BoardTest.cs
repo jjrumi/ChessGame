@@ -27,7 +27,7 @@ namespace BitterBloom.ChessGame.Engine.Tests
 		[Test()]
 		public void Can_Place_Piece_On_An_Empty_Tile_Of_The_Board()
 		{
-			board.PlacePiece( new Pawn( ChessEngine.PieceID.PawnA ), "A2" );
+			board.PlacePiece( new Pawn( ConfigChess.PieceID.PawnA ), "A2" );
 			Assert.IsFalse( board.Tiles["A2"].IsEmpty(), "Piece placed and board tile not empty" );
 		}
 
@@ -35,8 +35,8 @@ namespace BitterBloom.ChessGame.Engine.Tests
 		[ExpectedException( typeof( Board.TargetTileOccupiedException ) )]
 		public void Cannot_Place_Piece_On_An_Occupied_Tile_Of_The_Board()
 		{
-			board.PlacePiece( new Pawn( ChessEngine.PieceID.PawnA ), "A2" );
-			board.PlacePiece( new Rook( ChessEngine.PieceID.QueensRook ), "A2" );
+			board.PlacePiece( new Pawn( ConfigChess.PieceID.PawnA ), "A2" );
+			board.PlacePiece( new Rook( ConfigChess.PieceID.QueensRook ), "A2" );
 		}
 	}
 }

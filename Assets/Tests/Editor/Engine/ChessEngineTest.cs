@@ -16,7 +16,7 @@ namespace BitterBloom.ChessGame.Engine.Tests
 		public void Initialized_Chess_Has_A_Board_Initialized()
 		{
 			var boardMock = new Mock<IBoard>();
-			chess = new ChessEngine( boardMock.Object, new Player( ChessEngine.PlayerColor.White ), new Player( ChessEngine.PlayerColor.Black ) );
+			chess = new ChessEngine( boardMock.Object, new Player( Player.PlayerColor.White ), new Player( Player.PlayerColor.Black ), new ConfigChess() );
 			chess.Initialize();
 			boardMock.Verify( x => x.Initialize() );
 		}
@@ -25,7 +25,7 @@ namespace BitterBloom.ChessGame.Engine.Tests
 		public void Initialized_Chess_Has_Placed_Pieces_On_The_Board_For_2_Players()
 		{
 			Mock<IBoard> boardMock = new Mock<IBoard>();
-			chess = new ChessEngine( boardMock.Object, new Player( ChessEngine.PlayerColor.White ), new Player( ChessEngine.PlayerColor.Black ) );
+			chess = new ChessEngine( boardMock.Object, new Player( Player.PlayerColor.White ), new Player( Player.PlayerColor.Black ), new ConfigChess() );
 			chess.Initialize();
 			boardMock.Verify( x => x.PlaceListOfPieces( It.IsAny<Dictionary<Piece, string>>() ), Times.Exactly( 2 ) );
 		}
@@ -35,7 +35,7 @@ namespace BitterBloom.ChessGame.Engine.Tests
 		{
 			Mock<IPlayer> whitePlayerMock = new Mock<IPlayer>();
 			Mock<IPlayer> blackPlayerMock = new Mock<IPlayer>();
-			chess = new ChessEngine( new Board(), whitePlayerMock.Object, blackPlayerMock.Object );
+			chess = new ChessEngine( new Board(), whitePlayerMock.Object, blackPlayerMock.Object, new ConfigChess() );
 			chess.Initialize();
 			whitePlayerMock.VerifySet( x => x.Pieces = It.IsAny<Dictionary<Piece, string>>() );
 			blackPlayerMock.VerifySet( x => x.Pieces = It.IsAny<Dictionary<Piece, string>>() );
@@ -45,7 +45,7 @@ namespace BitterBloom.ChessGame.Engine.Tests
 		public void ChessEngine_Publish_List_Of_Board_Tiles()
 		{
 			Mock<IBoard> boardMock = new Mock<IBoard>();
-			chess = new ChessEngine( boardMock.Object, new Player( ChessEngine.PlayerColor.White ), new Player( ChessEngine.PlayerColor.Black ) );
+			chess = new ChessEngine( boardMock.Object, new Player( Player.PlayerColor.White ), new Player( Player.PlayerColor.Black ), new ConfigChess() );
 			chess.GetBoardTiles();
 
 			boardMock.Verify( x => x.ListBoardTiles() );
@@ -57,7 +57,7 @@ namespace BitterBloom.ChessGame.Engine.Tests
 			// Arrange:
 			Mock<IPlayer> whitePlayerMock = new Mock<IPlayer>();
 			Mock<IPlayer> blackPlayerMock = new Mock<IPlayer>();
-			chess = new ChessEngine( new Board(), whitePlayerMock.Object, blackPlayerMock.Object );
+			chess = new ChessEngine( new Board(), whitePlayerMock.Object, blackPlayerMock.Object, new ConfigChess() );
 
 			ArrayList whitePieces = new ArrayList();
 			whitePieces.Add( "White_Piece_A_Info" );

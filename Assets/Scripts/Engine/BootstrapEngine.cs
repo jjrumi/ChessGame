@@ -7,10 +7,11 @@ namespace BitterBloom.ChessGame.Engine
 		public static ChessEngine Execute()
 		{
 			ChessEngine chess = new ChessEngine(
-				new Board(),
-				new Player( ChessEngine.PlayerColor.White ),
-				new Player( ChessEngine.PlayerColor.Black )
-			);
+				                    new Board(),
+				                    new Player( Player.PlayerColor.White ),
+				                    new Player( Player.PlayerColor.Black ),
+				                    new ConfigChess()
+			                    );
 
 			return chess;
 		}

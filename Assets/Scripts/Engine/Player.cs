@@ -7,10 +7,16 @@ namespace BitterBloom.ChessGame.Engine
 {
 	public class Player : IPlayer
 	{
-		private ChessEngine.PlayerColor color;
+		public enum PlayerColor
+		{
+			White,
+			Black
+		}
+
+		private PlayerColor color;
 		private Dictionary<Piece, string> setPieces;
 
-		public Player( ChessEngine.PlayerColor color )
+		public Player( PlayerColor color )
 		{
 			this.color = color;
 		}
@@ -31,7 +37,7 @@ namespace BitterBloom.ChessGame.Engine
 			return list; 
 		}
 
-		public ChessEngine.PlayerColor Color { 
+		public PlayerColor Color { 
 			get{ return this.color; }
 		}
 
