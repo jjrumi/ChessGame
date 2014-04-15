@@ -13,8 +13,20 @@ namespace BitterBloom.ChessGame
 	{
 		void OnMouseDown()
 		{
-			Debug.Log( "OnMouseDown detected!!" );
 			string coord = this.name.Substring( 5 );
+
+			/*
+				What do I need to know?
+					- Which tile has been clicked? --> get Coord
+					- Is this tile occupied by a piece?
+					- Which piece is it? --> get GameObject
+					- Ask Engine what movements are allowed to that piece.
+					- Display allowed movements
+					- Which tile has been clicked?
+					- Is it a tile in the list of allowed movements?
+					- Move piece to the target.
+					
+			*/
 
 			if( Main.Move[0].Length == 0 )
 			{

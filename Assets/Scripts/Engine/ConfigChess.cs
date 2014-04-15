@@ -10,25 +10,14 @@ namespace BitterBloom.ChessGame.Engine
 	 */
 	public class ConfigChess
 	{
-		// TODO: Is it really necessary to ID all the pieces. Should it suffice with just the types?
 		public enum PieceID
 		{
-			PawnA,
-			PawnB,
-			PawnC,
-			PawnD,
-			PawnE,
-			PawnF,
-			PawnG,
-			PawnH,
-			QueensRook,
-			QueensKnight,
-			QueensBishop,
+			Pawn,
+			Rook,
+			Knight,
+			Bishop,
 			Queen,
-			King,
-			KingsBishop,
-			KingsKnight,
-			KingsRook
+			King
 		}
 
 		public string[] ListHorizontalBoardCoordinates()
@@ -49,22 +38,22 @@ namespace BitterBloom.ChessGame.Engine
 		public Dictionary<Piece, string> ListClassicLocationForWhitePieces()
 		{
 			Dictionary<Piece, string> whiteSetPieces = new Dictionary<Piece, string>();
-			whiteSetPieces.Add( new Pawn( PieceID.PawnA ), "A2" );
-			whiteSetPieces.Add( new Pawn( PieceID.PawnB ), "B2" );
-			whiteSetPieces.Add( new Pawn( PieceID.PawnC ), "C2" );
-			whiteSetPieces.Add( new Pawn( PieceID.PawnD ), "D2" );
-			whiteSetPieces.Add( new Pawn( PieceID.PawnE ), "E2" );
-			whiteSetPieces.Add( new Pawn( PieceID.PawnF ), "F2" );
-			whiteSetPieces.Add( new Pawn( PieceID.PawnG ), "G2" );
-			whiteSetPieces.Add( new Pawn( PieceID.PawnH ), "H2" );
-			whiteSetPieces.Add( new Rook( PieceID.QueensRook ), "A1" );
-			whiteSetPieces.Add( new Knight( PieceID.QueensKnight ), "B1" );
-			whiteSetPieces.Add( new Bishop( PieceID.QueensBishop ), "C1" );
+			whiteSetPieces.Add( new Pawn( PieceID.Pawn ), "A2" );
+			whiteSetPieces.Add( new Pawn( PieceID.Pawn ), "B2" );
+			whiteSetPieces.Add( new Pawn( PieceID.Pawn ), "C2" );
+			whiteSetPieces.Add( new Pawn( PieceID.Pawn ), "D2" );
+			whiteSetPieces.Add( new Pawn( PieceID.Pawn ), "E2" );
+			whiteSetPieces.Add( new Pawn( PieceID.Pawn ), "F2" );
+			whiteSetPieces.Add( new Pawn( PieceID.Pawn ), "G2" );
+			whiteSetPieces.Add( new Pawn( PieceID.Pawn ), "H2" );
+			whiteSetPieces.Add( new Rook( PieceID.Rook ), "A1" );
+			whiteSetPieces.Add( new Knight( PieceID.Knight ), "B1" );
+			whiteSetPieces.Add( new Bishop( PieceID.Bishop ), "C1" );
 			whiteSetPieces.Add( new Queen( PieceID.Queen ), "D1" );
 			whiteSetPieces.Add( new King( PieceID.King ), "E1" );
-			whiteSetPieces.Add( new Bishop( PieceID.KingsBishop ), "F1" );
-			whiteSetPieces.Add( new Knight( PieceID.KingsKnight ), "G1" );
-			whiteSetPieces.Add( new Rook( PieceID.KingsRook ), "H1" );
+			whiteSetPieces.Add( new Bishop( PieceID.Bishop ), "F1" );
+			whiteSetPieces.Add( new Knight( PieceID.Knight ), "G1" );
+			whiteSetPieces.Add( new Rook( PieceID.Rook ), "H1" );
 
 			return whiteSetPieces;
 		}
@@ -75,22 +64,22 @@ namespace BitterBloom.ChessGame.Engine
 		public Dictionary<Piece, string> ListClassicLocationForBlackPieces()
 		{
 			Dictionary<Piece, string> blackSetPieces = new Dictionary<Piece, string>();
-			blackSetPieces.Add( new Pawn( PieceID.PawnA ), "A7" );
-			blackSetPieces.Add( new Pawn( PieceID.PawnB ), "B7" );
-			blackSetPieces.Add( new Pawn( PieceID.PawnC ), "C7" );
-			blackSetPieces.Add( new Pawn( PieceID.PawnD ), "D7" );
-			blackSetPieces.Add( new Pawn( PieceID.PawnE ), "E7" );
-			blackSetPieces.Add( new Pawn( PieceID.PawnF ), "F7" );
-			blackSetPieces.Add( new Pawn( PieceID.PawnG ), "G7" );
-			blackSetPieces.Add( new Pawn( PieceID.PawnH ), "H7" );
-			blackSetPieces.Add( new Rook( PieceID.QueensRook ), "A8" );
-			blackSetPieces.Add( new Knight( PieceID.QueensKnight ), "B8" );
-			blackSetPieces.Add( new Bishop( PieceID.QueensBishop ), "C8" );
+			blackSetPieces.Add( new Pawn( PieceID.Pawn ), "A7" );
+			blackSetPieces.Add( new Pawn( PieceID.Pawn ), "B7" );
+			blackSetPieces.Add( new Pawn( PieceID.Pawn ), "C7" );
+			blackSetPieces.Add( new Pawn( PieceID.Pawn ), "D7" );
+			blackSetPieces.Add( new Pawn( PieceID.Pawn ), "E7" );
+			blackSetPieces.Add( new Pawn( PieceID.Pawn ), "F7" );
+			blackSetPieces.Add( new Pawn( PieceID.Pawn ), "G7" );
+			blackSetPieces.Add( new Pawn( PieceID.Pawn ), "H7" );
+			blackSetPieces.Add( new Rook( PieceID.Rook ), "A8" );
+			blackSetPieces.Add( new Knight( PieceID.Knight ), "B8" );
+			blackSetPieces.Add( new Bishop( PieceID.Bishop ), "C8" );
 			blackSetPieces.Add( new Queen( PieceID.Queen ), "D8" );
 			blackSetPieces.Add( new King( PieceID.King ), "E8" );
-			blackSetPieces.Add( new Bishop( PieceID.KingsBishop ), "F8" );
-			blackSetPieces.Add( new Knight( PieceID.KingsKnight ), "G8" );
-			blackSetPieces.Add( new Rook( PieceID.KingsRook ), "H8" );
+			blackSetPieces.Add( new Bishop( PieceID.Bishop ), "F8" );
+			blackSetPieces.Add( new Knight( PieceID.Knight ), "G8" );
+			blackSetPieces.Add( new Rook( PieceID.Rook ), "H8" );
 
 			return blackSetPieces;
 		}
