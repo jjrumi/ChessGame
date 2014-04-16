@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using UnityEngine;
 
 namespace BitterBloom.ChessGame
 {
@@ -10,10 +10,10 @@ namespace BitterBloom.ChessGame
 			Mesh m = new Mesh();
 			m.name = "PlaneMesh_" + name;
 			m.vertices = new Vector3[] {
-				new Vector3( -width/2, -height/2, 0.01f ),
-				new Vector3(  width/2, -height/2, 0.01f ),
-				new Vector3(  width/2,  height/2, 0.01f ),
-				new Vector3( -width/2,  height/2, 0.01f )
+				new Vector3( -width / 2, -height / 2, 0.01f ),
+				new Vector3( width / 2, -height / 2, 0.01f ),
+				new Vector3( width / 2, height / 2, 0.01f ),
+				new Vector3( -width / 2, height / 2, 0.01f )
 			};
 			m.uv = new Vector2[] {
 				new Vector2( 0, 0 ),

@@ -7,11 +7,19 @@ namespace BitterBloom.ChessGame
 	public class BoardConfig
 	{
 		public Dictionary<string, Vector2> mapTileToPosition;
+		public Dictionary<string, string> mapPieceToCoord;
 
 		public BoardConfig()
 		{
 			mapTileToPosition = new Dictionary<string, Vector2>();
 			FillUpMapTileToPosition();
+
+			mapPieceToCoord = new Dictionary<string, string>();
+		}
+
+		public void AddPieceToCoordInMap( string color, string pieceType, string coord )
+		{
+			mapPieceToCoord.Add( color + "_" + pieceType, coord );
 		}
 
 		public Vector2 GetPositionFromTileCoord( string tileCoord )
