@@ -14,7 +14,7 @@ namespace BitterBloom.ChessGame
 			FillUpMapTileToPosition();
 		}
 
-		public static Vector2 GetPositionFromTileCoord( string tileID )
+		public Vector2 GetPositionFromTileCoord( string tileID )
 		{
 			return mapTileToPosition[tileID];
 		}

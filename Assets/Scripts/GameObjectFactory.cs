@@ -24,6 +24,7 @@ namespace BitterBloom.ChessGame
 			GameObject tile = new GameObject( "Tile_" + objName );
 			attachMeshToTile( tile );
 			attachMaterialToTile( tile, ( tilePosition.x + tilePosition.y ) );
+			attachInputInteraction( tile );
 
 			return tile;
 		}
@@ -37,8 +38,6 @@ namespace BitterBloom.ChessGame
 
 			tile.AddComponent<MeshRenderer>();
 			tile.AddComponent<MeshFilter>().mesh = MeshGenerator.CreatePlaneMesh( tile.name, tileSize, tileSize );
-			tile.AddComponent<TileInteractor>();
-			tile.AddComponent<BoxCollider2D>();
 		}
 
 		/**
@@ -49,19 +48,29 @@ namespace BitterBloom.ChessGame
 			tile.renderer.material = ( tileIndex % 2 ) == 0 ? tileMaterials[0] : tileMaterials[1];
 		}
 
+		/**
+		 * Attach a script to handle the input interactions with the GameObject and a Collider to detect those interactions.
+		 */
+		private void attachInputInteraction( GameObject tile )
+		{
+			tile.AddComponent<TileInteractor>();
+			tile.AddComponent<BoxCollider2D>();
+		}
+
 		public GameObject buildChessPiece( string color, string pieceType )
 		{
 			GameObject piece = new GameObject( color + '_' + pieceType );
-			piece.AddComponent<SpriteRenderer>();
-
 			int spriteIndex = getSpritePositionFromPieceColorAndType( color, pieceType );
-			piece.GetComponent<SpriteRenderer>().sprite = chessPiecesSprite[spriteIndex];
-			piece.transform.localScale += new Vector3( 0.4f, 0.4f, 0 );
+
+			attachSpriteToPiece( piece, spriteIndex );
 
 			return piece;
 		}
 
-		int getSpritePositionFromPieceColorAndType( string color, string type )
+		/**
+		 * Map a piece to a sprite index.
+		 */
+		private int getSpritePositionFromPieceColorAndType( string color, string type )
 		{
 			Dictionary<string, int> mapPieceInfoToSprite = new Dictionary<string, int>();
 			mapPieceInfoToSprite.Add( "White_Pawn", 0 );
@@ -79,6 +88,16 @@ namespace BitterBloom.ChessGame
 			mapPieceInfoToSprite.Add( "Black_King", 11 );
 
 			return mapPieceInfoToSprite[color + '_' + type];
+		}
+
+		/**
+		 * Attach a sprite component to the GameObject and scale it to make it bigger and look nicer.
+		 */
+		private void attachSpriteToPiece( GameObject piece, int spriteIndex )
+		{
+			piece.AddComponent<SpriteRenderer>();
+			piece.GetComponent<SpriteRenderer>().sprite = chessPiecesSprite[spriteIndex];
+			piece.transform.localScale += new Vector3( 0.4f, 0.4f, 0 );
 		}
 	}
 }

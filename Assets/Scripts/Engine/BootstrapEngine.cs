@@ -4,7 +4,7 @@ namespace BitterBloom.ChessGame.Engine
 {
 	public class BootstrapEngine
 	{
-		public static ChessEngine Execute()
+		public static IChessEngine Execute()
 		{
 			ChessEngine chess = new ChessEngine(
 				                    new Board(),

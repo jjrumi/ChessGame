@@ -5,7 +5,7 @@ using BitterBloom.ChessGame.Engine.Pieces;
 
 namespace BitterBloom.ChessGame.Engine
 {
-	public class ChessEngine
+	public class ChessEngine : IChessEngine
 	{
 		private IBoard board;
 		private IPlayer white;
