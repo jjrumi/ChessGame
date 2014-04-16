@@ -27,7 +27,8 @@ namespace BitterBloom.ChessGame.GUI
 				Vector2 tilePosition = boardConfig.GetPositionFromTileCoord( coord );
 
 				GameObject tile = gof.buildTile( coord, tilePosition );
-				positionGameObject( tile, tilePosition );
+				tile.renderer.material = TileRenderer.GetMaterialForHarlequin( tilePosition.x + tilePosition.y );
+				tile.transform.position = new Vector3( tilePosition.x, tilePosition.y, 5.0f );
 
 				boardConfig.AddCoordToTileInMap( coord, tile );
 			}
@@ -47,19 +48,11 @@ namespace BitterBloom.ChessGame.GUI
 				string coord = pieceInfo[2];
 
 				GameObject piece = gof.buildChessPiece( color, pieceType );
-				positionGameObject( piece, boardConfig.GetPositionFromTileCoord( coord ) );
+				Vector2 piecePosition = boardConfig.GetPositionFromTileCoord( coord );
+				piece.transform.position = new Vector3( piecePosition.x, piecePosition.y, 1.0f );
 
 				boardConfig.AddCoordToPieceInMap( coord, piece );
 			}
-		}
-
-		private void positionGameObject( GameObject go, Vector2 position )
-		{
-			go.transform.position = new Vector3(
-				position.x,
-				position.y,
-				1.0f
-			);
 		}
 	}
 }

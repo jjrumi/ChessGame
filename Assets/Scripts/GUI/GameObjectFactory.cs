@@ -10,7 +10,6 @@ namespace BitterBloom.ChessGame.GUI
 		{
 			GameObject tile = new GameObject( "Tile_" + objName );
 			attachMeshToTile( tile );
-			attachMaterialToTile( tile, ( tilePosition.x + tilePosition.y ) );
 			attachInputInteraction( tile );
 
 			return tile;

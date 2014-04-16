@@ -6,12 +6,7 @@ namespace BitterBloom.ChessGame.GUI
 {
 	public class PieceRenderer
 	{
-		private static Sprite[] chessPiecesSprite;
-
-		public PieceRenderer()
-		{
-			chessPiecesSprite = Resources.LoadAll<Sprite>( "Sprites/pieces-sprite" );
-		}
+		private static Sprite[] chessPiecesSprite = Resources.LoadAll<Sprite>( "Sprites/pieces-sprite" );
 
 		public static Sprite GetSprite( string pieceColor, string pieceType )
 		{

@@ -50,6 +50,9 @@ namespace BitterBloom.ChessGame.Engine
 			return mergedList;
 		}
 
+		/**
+		 * TODO: Implement.
+		 */
 		public ArrayList GetAllowedMoves( string coord )
 		{
 			ArrayList moves = new ArrayList();
@@ -59,10 +62,15 @@ namespace BitterBloom.ChessGame.Engine
 			return moves;
 		}
 
+		/**
+		 * TODO: Implement.
+		 */
 		public bool MovePiece( string[] coords )
 		{
+			/*
 			Piece poppedPiece = board.RemovePiece( coords[0] );
 			board.PlacePiece( poppedPiece, coords[1] );
+			*/
 
 			return true;
 		}

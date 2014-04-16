@@ -21,26 +21,18 @@ namespace BitterBloom.ChessGame
 		private WorldCamera worldCamera;
 		public static string[] Move;
 		public BoardConfig boardConfig;
+		public GameObjectFactory gof;
 
 		private void Awake()
 		{
 			chess = BootstrapEngine.Execute();
-			LoadResources();	
 			worldCamera = new WorldCamera();
 			boardConfig = new BoardConfig();
+			gof = new GameObjectFactory();
 			view = new ChessView( new GameObjectFactory(), boardConfig );
 
 			// TODO: Take move out of here! Place it in a class where it makes sense.
 			Move = new string[]{ "", "" };
-		}
-
-		/**
-		 * Load Materials and Sprites for Tiles and Pieces.
-		 */
-		private void LoadResources()
-		{
-			new TileRenderer();
-			new PieceRenderer();
 		}
 
 		private void Start()
