@@ -18,21 +18,15 @@ namespace BitterBloom.ChessGame
 	{
 		private ChessView view;
 		public IChessEngine chess;
-		private WorldCamera worldCamera;
-		public static string[] Move;
 		public BoardConfig boardConfig;
 		public GameObjectFactory gof;
 
 		private void Awake()
 		{
 			chess = BootstrapEngine.Execute();
-			worldCamera = new WorldCamera();
 			boardConfig = new BoardConfig();
 			gof = new GameObjectFactory();
 			view = new ChessView( new GameObjectFactory(), boardConfig );
-
-			// TODO: Take move out of here! Place it in a class where it makes sense.
-			Move = new string[]{ "", "" };
 		}
 
 		private void Start()
@@ -53,7 +47,7 @@ namespace BitterBloom.ChessGame
 		 */
 		private void PlaceCamera()
 		{
-			worldCamera.Position( new Vector3( 3.5f, 3.5f, -10f ) );
+			Camera.main.transform.position = new Vector3( 3.5f, 3.5f, -10f );
 		}
 	}
 }

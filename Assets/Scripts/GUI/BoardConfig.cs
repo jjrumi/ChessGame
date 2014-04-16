@@ -24,6 +24,13 @@ namespace BitterBloom.ChessGame
 			mapCoordToPieceObject.Add( coord, piece );
 		}
 
+		public void UpdateCoordToPieceInMap( string oldCoord, string newCoord )
+		{
+			GameObject piece = mapCoordToPieceObject[oldCoord];
+			mapCoordToPieceObject.Remove( oldCoord );
+			mapCoordToPieceObject.Add( newCoord, piece );
+		}
+
 		public void AddCoordToTileInMap( string coord, GameObject tile )
 		{
 			mapCoordToTileObject.Add( coord, tile );

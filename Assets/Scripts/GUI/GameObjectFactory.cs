@@ -1,6 +1,7 @@
 ﻿using System;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using BitterBloom.ChessGame.Events;
 
 namespace BitterBloom.ChessGame.GUI
 {
@@ -39,7 +40,7 @@ namespace BitterBloom.ChessGame.GUI
 		 */
 		private void attachInputInteraction( GameObject tile )
 		{
-			tile.AddComponent<TileInteractor>();
+			tile.AddComponent<TileEvent>();
 			tile.AddComponent<BoxCollider2D>();
 		}
 

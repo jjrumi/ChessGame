@@ -65,7 +65,7 @@ namespace BitterBloom.ChessGame.Engine
 		/**
 		 * TODO: Implement.
 		 */
-		public bool MovePiece( string[] coords )
+		public bool MovePiece()
 		{
 			/*
 			Piece poppedPiece = board.RemovePiece( coords[0] );
