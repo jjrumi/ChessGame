@@ -7,24 +7,46 @@ namespace BitterBloom.ChessGame
 	public class BoardConfig
 	{
 		public Dictionary<string, Vector2> mapTileToPosition;
-		public Dictionary<string, string> mapPieceToCoord;
+		public Dictionary<string, GameObject> mapCoordToPieceObject;
+		public Dictionary<string, GameObject> mapCoordToTileObject;
 
 		public BoardConfig()
 		{
 			mapTileToPosition = new Dictionary<string, Vector2>();
 			FillUpMapTileToPosition();
 
-			mapPieceToCoord = new Dictionary<string, string>();
+			mapCoordToPieceObject = new Dictionary<string, GameObject>();
+			mapCoordToTileObject = new Dictionary<string, GameObject>();
 		}
 
-		public void AddPieceToCoordInMap( string color, string pieceType, string coord )
+		public void AddCoordToPieceInMap( string coord, GameObject piece )
 		{
-			mapPieceToCoord.Add( color + "_" + pieceType, coord );
+			mapCoordToPieceObject.Add( coord, piece );
 		}
 
-		public Vector2 GetPositionFromTileCoord( string tileCoord )
+		public void AddCoordToTileInMap( string coord, GameObject tile )
 		{
-			return mapTileToPosition[tileCoord];
+			mapCoordToTileObject.Add( coord, tile );
+		}
+
+		public GameObject GetPieceFromCoord( string coord )
+		{
+			if( mapCoordToPieceObject.ContainsKey( coord ) )
+			{
+				return mapCoordToPieceObject[coord];
+			}
+
+			return null;
+		}
+
+		public GameObject GetTileFromCoord( string coord )
+		{
+			return mapCoordToTileObject[coord];
+		}
+
+		public Vector2 GetPositionFromTileCoord( string coord )
+		{
+			return mapTileToPosition[coord];
 		}
 
 		private void FillUpMapTileToPosition()

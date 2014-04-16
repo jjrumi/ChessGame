@@ -50,6 +50,15 @@ namespace BitterBloom.ChessGame.Engine
 			return mergedList;
 		}
 
+		public ArrayList GetAllowedMoves( string coord )
+		{
+			ArrayList moves = new ArrayList();
+			moves.Add( "A3" );
+			moves.Add( "A4" );
+
+			return moves;
+		}
+
 		public bool MovePiece( string[] coords )
 		{
 			Piece poppedPiece = board.RemovePiece( coords[0] );

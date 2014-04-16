@@ -17,15 +17,19 @@ namespace BitterBloom.ChessGame.GUI
 
 		/**
 		 * Construct a GameObject for each board tile and place it in the world.
+		 * 
+		 * Initialize [tile,coord] relations in the BoardConfig.
 		 */
-		public void DrawBoardTiles( ArrayList tiles )
+		public void DrawBoardTiles( ArrayList tilesCoords )
 		{
-			foreach( string tileCoord in tiles )
+			foreach( string coord in tilesCoords )
 			{
-				Vector2 tilePosition = boardConfig.GetPositionFromTileCoord( tileCoord );
+				Vector2 tilePosition = boardConfig.GetPositionFromTileCoord( coord );
 
-				GameObject tile = gof.buildTile( tileCoord, tilePosition );
+				GameObject tile = gof.buildTile( coord, tilePosition );
 				positionGameObject( tile, tilePosition );
+
+				boardConfig.AddCoordToTileInMap( coord, tile );
 			}
 		}
 
@@ -45,7 +49,7 @@ namespace BitterBloom.ChessGame.GUI
 				GameObject piece = gof.buildChessPiece( color, pieceType );
 				positionGameObject( piece, boardConfig.GetPositionFromTileCoord( coord ) );
 
-				boardConfig.AddPieceToCoordInMap( color, pieceType, coord );
+				boardConfig.AddCoordToPieceInMap( coord, piece );
 			}
 		}
 

@@ -6,19 +6,6 @@ namespace BitterBloom.ChessGame.GUI
 {
 	public class GameObjectFactory
 	{
-		private Material[] tileMaterials;
-		private Sprite[] chessPiecesSprite;
-
-		public GameObjectFactory()
-		{
-			tileMaterials = new Material[] { 
-				Resources.Load( "Materials/Dark-brown", typeof( Material ) ) as Material, 
-				Resources.Load( "Materials/Light-brown", typeof( Material ) ) as Material
-			};
-
-			chessPiecesSprite = Resources.LoadAll<Sprite>( "Sprites/pieces-sprite" );
-		}
-
 		public GameObject buildTile( string objName, Vector2 tilePosition )
 		{
 			GameObject tile = new GameObject( "Tile_" + objName );
@@ -45,7 +32,7 @@ namespace BitterBloom.ChessGame.GUI
 		 */
 		private void attachMaterialToTile( GameObject tile, float tileIndex )
 		{
-			tile.renderer.material = ( tileIndex % 2 ) == 0 ? tileMaterials[0] : tileMaterials[1];
+			tile.renderer.material = ( tileIndex % 2 ) == 0 ? TileRenderer.GetMaterial( TileRenderer.DarkBrown ) : TileRenderer.GetMaterial( TileRenderer.LightBrown );
 		}
 
 		/**
@@ -57,46 +44,22 @@ namespace BitterBloom.ChessGame.GUI
 			tile.AddComponent<BoxCollider2D>();
 		}
 
-		public GameObject buildChessPiece( string color, string pieceType )
+		public GameObject buildChessPiece( string pieceColor, string pieceType )
 		{
-			GameObject piece = new GameObject( color + '_' + pieceType );
-			int spriteIndex = getSpritePositionFromPieceColorAndType( color, pieceType );
+			GameObject piece = new GameObject( pieceColor + '_' + pieceType );
 
-			attachSpriteToPiece( piece, spriteIndex );
+			attachSpriteToPiece( piece, pieceColor, pieceType );
 
 			return piece;
 		}
 
 		/**
-		 * Map a piece to a sprite index.
-		 */
-		private int getSpritePositionFromPieceColorAndType( string color, string type )
-		{
-			Dictionary<string, int> mapPieceInfoToSprite = new Dictionary<string, int>();
-			mapPieceInfoToSprite.Add( "White_Pawn", 0 );
-			mapPieceInfoToSprite.Add( "White_Bishop", 1 );
-			mapPieceInfoToSprite.Add( "White_Knight", 2 );
-			mapPieceInfoToSprite.Add( "White_Rook", 3 );
-			mapPieceInfoToSprite.Add( "White_Queen", 4 );
-			mapPieceInfoToSprite.Add( "White_King", 5 );
-
-			mapPieceInfoToSprite.Add( "Black_Pawn", 6 );
-			mapPieceInfoToSprite.Add( "Black_Bishop", 7 );
-			mapPieceInfoToSprite.Add( "Black_Knight", 8 );
-			mapPieceInfoToSprite.Add( "Black_Rook", 9 );
-			mapPieceInfoToSprite.Add( "Black_Queen", 10 );
-			mapPieceInfoToSprite.Add( "Black_King", 11 );
-
-			return mapPieceInfoToSprite[color + '_' + type];
-		}
-
-		/**
 		 * Attach a sprite component to the GameObject and scale it to make it bigger and look nicer.
 		 */
-		private void attachSpriteToPiece( GameObject piece, int spriteIndex )
+		private void attachSpriteToPiece( GameObject piece, string pieceColor, string pieceType )
 		{
 			piece.AddComponent<SpriteRenderer>();
-			piece.GetComponent<SpriteRenderer>().sprite = chessPiecesSprite[spriteIndex];
+			piece.GetComponent<SpriteRenderer>().sprite = PieceRenderer.GetSprite( pieceColor, pieceType );
 			piece.transform.localScale += new Vector3( 0.4f, 0.4f, 0 );
 		}
 	}

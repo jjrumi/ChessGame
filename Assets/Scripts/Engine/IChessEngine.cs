@@ -11,6 +11,8 @@ namespace BitterBloom.ChessGame.Engine
 
 		ArrayList GetChessPieces();
 
+		ArrayList GetAllowedMoves( string coord );
+
 		bool MovePiece( string[] coords );
 	}
 }
