@@ -9,10 +9,10 @@ namespace BitterBloom.ChessGame.GUI
 		private GameObjectFactory gof;
 		private BoardConfig boardConfig;
 
-		public ChessView()
+		public ChessView( GameObjectFactory gof, BoardConfig boardConfig )
 		{
-			gof = new GameObjectFactory();
-			boardConfig = new BoardConfig();
+			this.gof = gof;
+			this.boardConfig = boardConfig;
 		}
 
 		public void DrawBoardTiles( ArrayList tiles )
@@ -22,7 +22,7 @@ namespace BitterBloom.ChessGame.GUI
 				Vector2 tilePosition = boardConfig.GetPositionFromTileCoord( tileCoord );
 
 				GameObject tile = gof.buildTile( tileCoord, tilePosition );
-				positionGivenGameObject( tile, tilePosition );
+				positionGameObject( tile, tilePosition );
 			}
 		}
 
@@ -35,14 +35,11 @@ namespace BitterBloom.ChessGame.GUI
 				string coord = pieceInfo[2];
 
 				GameObject piece = gof.buildChessPiece( color, pieceID );
-				positionGivenGameObject( piece, boardConfig.GetPositionFromTileCoord( coord ) );
+				positionGameObject( piece, boardConfig.GetPositionFromTileCoord( coord ) );
 			}
 		}
 
-		/**
-		 * Place the given object to the given position.
-		 */
-		private void positionGivenGameObject( GameObject go, Vector2 position )
+		private void positionGameObject( GameObject go, Vector2 position )
 		{
 			go.transform.position = new Vector3(
 				position.x,

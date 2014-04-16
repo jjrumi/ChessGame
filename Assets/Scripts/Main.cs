@@ -10,9 +10,9 @@ namespace BitterBloom.ChessGame
 	 * Entry point of the application:
 	 * 	Awake() -> Start() and afterwards Update() on every frame.
 	 * 
-	 * Bootstrap is done here.
+	 * Instantiates needed classes for the application.
 	 * 
-	 * View of the chess game.
+	 * Draws the scene & places the camera.
 	 */
 	public class Main : MonoBehaviour
 	{
@@ -21,20 +21,17 @@ namespace BitterBloom.ChessGame
 		private WorldCamera worldCamera;
 		public static string[] Move;
 
-		void Awake()
+		private void Awake()
 		{
 			chess = BootstrapEngine.Execute();
 			worldCamera = new WorldCamera();
-			view = new ChessView();
+			view = new ChessView( new GameObjectFactory(), new BoardConfig() );
 
 			// TODO: Take move out of here! Place it in a class where it makes sense.
 			Move = new string[]{ "", "" };
 		}
 
-		/**
-		 * Use this for initialization
-		 */
-		public void Start()
+		private void Start()
 		{
 			chess.Initialize();
 			DrawScene();

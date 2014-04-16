@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace BitterBloom.ChessGame
+namespace BitterBloom.ChessGame.GUI
 {
 	public class GameObjectFactory
 	{
