@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using BitterBloom.ChessGame.Engine;
+using BitterBloom.ChessGame.GUI;
 
 namespace BitterBloom.ChessGame
 {
@@ -27,7 +28,15 @@ namespace BitterBloom.ChessGame
 				{
 					GameObject tile = boardConfig.GetTileFromCoord( targetCoord );
 
+					tile.renderer.material = TileRenderer.GetMaterial( TileRenderer.LightYellow );
 
+					/*
+					TODO:
+						Create a plane for each target tile.
+						Place the plane in the target coord.
+						Scale to 0.92 the plane.
+						Think about how to destroy them.
+					*/
 				}
 			}
 
