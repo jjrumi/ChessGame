@@ -10,6 +10,7 @@ Library/
 # Unity Test Tools
 # ================ #
 Assets/UnityTestTools
+test-results
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -23,7 +24,6 @@ ExportedObj/
 *.sln
 *.user
 *.unityproj
-*.unity
 *.booproj
 *.meta
 
